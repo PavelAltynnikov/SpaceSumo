@@ -1,5 +1,8 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
+[RequireComponent(typeof(Player))]
+[RequireComponent(typeof(Rigidbody))]
 public class JumpAbility : MonoBehaviour
 {
     [SerializeField] private float _force;
@@ -7,6 +10,7 @@ public class JumpAbility : MonoBehaviour
     private Player _player;
     private Rigidbody _playerBody;
 
+    # region Implement MonoBehaviour Methods
     private void Start()
     {
         _player = GetComponent<Player>();
@@ -17,6 +21,7 @@ public class JumpAbility : MonoBehaviour
     {
         TryToJump();
     }
+    # endregion
 
     private void TryToJump()
     {
@@ -29,6 +34,20 @@ public class JumpAbility : MonoBehaviour
 
         if (jumpInput <= 0.01)
         {
+            return;
+        }
+
+        Jump();
+    }
+
+    private void Jump()
+    {
+        if (_force == 0)
+        {
+            Debug.LogError(
+                $"Чтобы прыгнуть параметр силы \"{nameof(_force)}\" не может быть равен нулю.",
+                this
+            );
             return;
         }
 
