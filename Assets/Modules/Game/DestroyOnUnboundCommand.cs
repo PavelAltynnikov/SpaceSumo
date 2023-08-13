@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts
+namespace SpaceSumo.Game
 {
     public class DestroyOnUnboundCommand : MonoBehaviour
     {
