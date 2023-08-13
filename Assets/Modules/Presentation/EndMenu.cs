@@ -4,37 +4,34 @@ using UnityEngine.UI;
 
 namespace SpaceSumo.Presentation
 {
-    public class StartMenu : Menu
+    public class EndMenu : Menu
     {
-        [SerializeField] private Menu _startMenu;
         [SerializeField] private Menu _gameMenu;
         [SerializeField] private Menu _settingsMenu;
 
-        [SerializeField] private Button? _startButton;
+        [SerializeField] private Button? _restartButton;
         [SerializeField] private Button? _settingsButton;
         // [SerializeField] private Button? _ExitButton;
 
         private void OnEnable()
         {
-            _startButton?.onClick.AddListener(StartGame);
+            _restartButton?.onClick.AddListener(StartGame);
             _settingsButton?.onClick.AddListener(OpenSettings);
         }
 
         private void OnDisable()
         {
-            _startButton?.onClick.RemoveListener(StartGame);
+            _restartButton?.onClick.RemoveListener(StartGame);
             _settingsButton?.onClick.RemoveListener(OpenSettings);
         }
 
         private void StartGame()
         {
-            _startMenu.Hide();
             _gameMenu.Show();
         }
 
         private void OpenSettings()
         {
-            _startMenu.Hide();
             _settingsMenu.Show(this);
         }
     }
