@@ -2,16 +2,13 @@ using UnityEngine;
 
 namespace SpaceSumo.Game
 {
+    [RequireComponent(typeof(Rigidbody))]
     public class Enemy : MonoBehaviour
     {
-        public GameObject target;
-
         [SerializeField] private float _speed;
-        [SerializeField] private int _score;
+        [SerializeField] public Transform _target;
 
         private Rigidbody _rigidBody;
-
-        public int Score => _score;
 
         private void Start()
         {
@@ -20,12 +17,12 @@ namespace SpaceSumo.Game
 
         private void Update()
         {
-            if (target == null)
+            if (_target is null)
             {
                 return;
             }
 
-            Vector3 directionToTarget = target.transform.position - transform.position;
+            Vector3 directionToTarget = _target.position - transform.position;
 
             _rigidBody.AddForce(directionToTarget.normalized * _speed);
         }
