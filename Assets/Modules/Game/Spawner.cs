@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using SpaceSumo.Powerups;
 
@@ -6,19 +7,19 @@ namespace SpaceSumo.Game
 {
     public class Spawner : MonoBehaviour
     {
-        private List<GameObject> _enemiesOnScene = new List<GameObject>();
-        private GameObject _player;
+        [SerializeField] private Enemy[] _enemyPrefabs;
+        [SerializeField] private Enemy[] _bossPrefabs;
+        [SerializeField] private GameObject[] _powerupPrefabs;
+        [SerializeField] private Player _playerPrefab;
 
         [SerializeField] private float _spawnRange = 9f;
 
-        [SerializeField] private GameObject[] _enemyPrefabs;
-        [SerializeField] private GameObject[] _bossPrefabs;
-        [SerializeField] private GameObject[] _powerupPrefabs;
-        [SerializeField] private GameObject _playerPrefab;
+        private List<Enemy> _enemiesOnScene = new List<Enemy>();
+        private Player _player;
 
-        public List<GameObject> EnemiesOnScene => _enemiesOnScene;
+        public bool IsWaveClear => _enemiesOnScene.Any() == false;
 
-        public GameObject SpawnPlayer()
+        public Player SpawnPlayer()
         {
             _player = Instantiate(_playerPrefab, GenerateRandomPosition(), _playerPrefab.transform.rotation);
             return _player;
@@ -28,36 +29,26 @@ namespace SpaceSumo.Game
         {
             for (int i = 0; i < countOfEnemies; i++)
             {
-                GameObject enemyPrefab = GetRandomPrefab(_enemyPrefabs);
-                GameObject enemy = Instantiate(enemyPrefab, GenerateRandomPosition(), enemyPrefab.transform.rotation);
-                enemy.GetComponent<Enemy>().target = _player;
-
-                var destroyOnUnbound = enemy.GetComponent<DestroyOnUnboundCommand>();
-                destroyOnUnbound.RemoveObject += RemoveEnemey;
+                Enemy enemyPrefab = GetRandomItem(_enemyPrefabs);
+                Enemy enemy = Instantiate(enemyPrefab, GenerateRandomPosition(), enemyPrefab.transform.rotation);
+                enemy.GetComponent<Enemy>()._target = _player.transform;
 
                 _enemiesOnScene.Add(enemy);
             }
         }
 
-        public void SpawnBoss()
-        {
-            GameObject bossPrefab = GetRandomPrefab(_bossPrefabs);
-            GameObject boss = Instantiate(bossPrefab, GenerateRandomPosition(), bossPrefab.transform.rotation);
-            boss.GetComponent<Enemy>().target = _player;
-
-            var destroyOnUnbound = boss.GetComponent<DestroyOnUnboundCommand>();
-            destroyOnUnbound.RemoveObject += RemoveEnemey;
-
-            _enemiesOnScene.Add(boss);
-        }
-
         public void SpawnRandomPowerup()
         {
-            GameObject powerupPrefab = GetRandomPrefab(_powerupPrefabs);
+            GameObject powerupPrefab = GetRandomItem(_powerupPrefabs);
             Instantiate(powerupPrefab, GenerateRandomPosition(), powerupPrefab.transform.rotation);
         }
 
-        public void DestoryAllWaveObjects()
+        public void RemoveEnemy(object sender, EnemyGoesOutOfBoundEventArgs e)
+        {
+            _enemiesOnScene.Remove(e.Enemy);
+        }
+
+        public void DestroyAllWaveObjects()
         {
             GameObject[] enemies = FindObjectsOfType<GameObject>();
 
@@ -72,15 +63,10 @@ namespace SpaceSumo.Game
             }
         }
 
-        private GameObject GetRandomPrefab(GameObject[] prefabs)
+        private T GetRandomItem<T>(T[] prefabs)
         {
             int randomIndex = Random.Range(0, prefabs.Length);
             return prefabs[randomIndex];
-        }
-
-        private void RemoveEnemey(GameObject enemy)
-        {
-            _enemiesOnScene.Remove(enemy);
         }
 
         private Vector3 GenerateRandomPosition()
