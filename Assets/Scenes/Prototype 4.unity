@@ -153,7 +153,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &58266397
 MonoBehaviour:
@@ -1256,7 +1256,7 @@ RectTransform:
   - {fileID: 851598861}
   - {fileID: 2126525062}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1275,7 +1275,7 @@ GameObject:
   - component: {fileID: 477404661}
   - component: {fileID: 477404663}
   m_Layer: 0
-  m_Name: Game
+  m_Name: GameRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1293,13 +1293,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d545605bee0995e4a87895f7d0182eeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startMenuUI: {fileID: 800153140}
-  _gameMenuUI: {fileID: 1462817624}
-  _settingsMenuUI: {fileID: 851598860}
-  _endMenuUI: {fileID: 2126525061}
+  _startMenuUI: {fileID: 800153142}
+  _gameMenuUI: {fileID: 1462817626}
+  _settingsMenuUI: {fileID: 851598862}
+  _endMenuUI: {fileID: 2126525063}
   _spawner: {fileID: 58266397}
-  _waveLabel: {fileID: 1312786377}
-  _scoreLabel: {fileID: 0}
+  _audioSource: {fileID: 477404663}
 --- !u!4 &477404662
 Transform:
   m_ObjectHideFlags: 0
@@ -1313,7 +1312,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &477404663
 AudioSource:
@@ -1326,7 +1325,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d211d5235bec95b468b6429d4e8163b7, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
@@ -2249,7 +2248,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec0e637db7140be9958b36ada360fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startMenu: {fileID: 0}
+  _startMenu: {fileID: 800153142}
   _gameMenu: {fileID: 1462817626}
   _settingsMenu: {fileID: 851598862}
   _startButton: {fileID: 1283018579}
@@ -2594,7 +2593,7 @@ Transform:
   - {fileID: 1403545345}
   - {fileID: 1211016357}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &950749391
 GameObject:
@@ -5199,7 +5198,7 @@ Transform:
   m_Children:
   - {fileID: 1446756112}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1660518446
 GameObject:

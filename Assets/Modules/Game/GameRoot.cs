@@ -1,20 +1,18 @@
 using SpaceSumo.Powerups;
-using TMPro;
+using SpaceSumo.Presentation;
 using UnityEngine;
 
 namespace SpaceSumo.Game
 {
-    public class Game : MonoBehaviour
+    public class GameRoot : MonoBehaviour
     {
-        [SerializeField] private GameObject _startMenuUI;
-        [SerializeField] private GameObject _gameMenuUI;
-        [SerializeField] private GameObject _settingsMenuUI;
-        [SerializeField] private GameObject _endMenuUI;
+        [SerializeField] private StartMenu _startMenuUI;
+        [SerializeField] private GameMenu _gameMenuUI;
+        [SerializeField] private SettingsMenu _settingsMenuUI;
+        [SerializeField] private EndMenu _endMenuUI;
 
         [SerializeField] private Spawner _spawner;
-
-        [SerializeField] private TextMeshProUGUI _waveLabel;
-        [SerializeField] private TextMeshProUGUI _scoreLabel;
+        [SerializeField] private AudioSource _audioSource;
 
         private int _waveNumber = 0;
         private int _scoreAmount = 0;
@@ -22,40 +20,31 @@ namespace SpaceSumo.Game
         private bool _isGameStarted = false;
 
         private PowerupIndicator _player;
-        private AudioSource _audioSource;
 
-        private GameObject _previousMenu;
-
-        private void Awake()
+        private void OnEnable()
         {
-            _previousMenu = _startMenuUI;
+            _audioSource.Play();
+            _startMenuUI.Show();
 
-            _startMenuUI.SetActive(true);
-            _settingsMenuUI.SetActive(false);
-            _gameMenuUI.SetActive(false);
-            _endMenuUI.SetActive(false);
+            _startMenuUI.StartButtonPressed += StartGame;
         }
 
-        public void InitializeGame()
+        private void OnDisable()
         {
+            _audioSource.Stop();
+
+            _startMenuUI.StartButtonPressed -= StartGame;
+        }
+
+        private void StartGame()
+        {
+            // TODO перенести в Game
             _waveNumber++;
             _isGameStarted = true;
-
-            _startMenuUI.SetActive(false);
-            _gameMenuUI.SetActive(true);
 
             _player = _spawner.SpawnPlayer().GetComponent<PowerupIndicator>();
             _spawner.SpawnNewWave(_waveNumber);
             _spawner.SpawnRandomPowerup();
-
-            _waveLabel.text = $"Waves: {_waveNumber}";
-            _scoreLabel.text = $"Score: {_scoreAmount}";
-        }
-
-        public void BackFromSettings()
-        {
-            _previousMenu.SetActive(true);
-            _settingsMenuUI.SetActive(false);
         }
 
         public void GameOver()
@@ -63,8 +52,7 @@ namespace SpaceSumo.Game
             _isGameStarted = false;
             _waveNumber = 0;
             _scoreAmount = 0;
-            _endMenuUI.SetActive(true);
-            _previousMenu = _endMenuUI;
+            _endMenuUI.Show(_gameMenuUI);
         }
 
         public void RestartGame()
@@ -72,13 +60,7 @@ namespace SpaceSumo.Game
             _waveNumber = 1;
             _scoreAmount = 0;
 
-            _waveLabel.text = $"Waves: {_waveNumber}";
-            _scoreLabel.text = $"Score: {_scoreAmount}";
-
-            _startMenuUI.SetActive(false);
-            _gameMenuUI.SetActive(true);
-            _endMenuUI.SetActive(false);
-
+            _gameMenuUI.Show(_endMenuUI);
             _spawner.DestoryAllWaveObjects();
 
             _player = _spawner.SpawnPlayer().GetComponent<PowerupIndicator>();
@@ -106,12 +88,9 @@ namespace SpaceSumo.Game
                 return;
             }
 
-            _scoreLabel.text = $"Score: {_scoreAmount}";
-
             if (IsWaveClear())
             {
                 _waveNumber++;
-                _waveLabel.text = $"Waves: {_waveNumber}";
 
                 _spawner.SpawnNewWave(_waveNumber);
                 _spawner.SpawnRandomPowerup();

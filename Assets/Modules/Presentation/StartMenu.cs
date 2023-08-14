@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,8 @@ namespace SpaceSumo.Presentation
         [SerializeField] private Button? _settingsButton;
         // [SerializeField] private Button? _ExitButton;
 
+        public event Action? StartButtonPressed;
+
         private void OnEnable()
         {
             _startButton?.onClick.AddListener(StartGame);
@@ -28,8 +31,8 @@ namespace SpaceSumo.Presentation
 
         private void StartGame()
         {
-            _startMenu.Hide();
-            _gameMenu.Show();
+            _gameMenu.Show(_startMenu);
+            StartButtonPressed?.Invoke();
         }
 
         private void OpenSettings()

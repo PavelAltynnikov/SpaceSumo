@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SpaceSumo.Game
 {
@@ -7,7 +8,7 @@ namespace SpaceSumo.Game
         [SerializeField] private float _horizontalUnbound;
         [SerializeField] private float _verticalUnbound;
 
-        [SerializeField] private Game _game;
+        [FormerlySerializedAs("_game")] [SerializeField] private GameRoot _gameRoot;
 
         public delegate void RemoveObjectDelegate(GameObject object_);
 
@@ -15,7 +16,7 @@ namespace SpaceSumo.Game
 
         private void Start()
         {
-            _game = FindObjectOfType<Game>();
+            _gameRoot = FindObjectOfType<GameRoot>();
         }
 
         private void Update()
@@ -29,7 +30,7 @@ namespace SpaceSumo.Game
                 if (CompareTag("Enemy"))
                 {
                     var enemy = gameObject.GetComponent<Enemy>();
-                    _game?.UpdateScore(enemy.Score);
+                    _gameRoot?.UpdateScore(enemy.Score);
                 }
 
                 Destroy(gameObject);

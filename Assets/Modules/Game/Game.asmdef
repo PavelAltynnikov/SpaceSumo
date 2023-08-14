@@ -3,6 +3,7 @@
     "rootNamespace": "SpaceSumo.Game",
     "references": [
         "GUID:4ebc5a3a826c47e388c6b1938832f668",
+        "GUID:ee68e4b176e245d2944db62ebeb7b53c",
         "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
