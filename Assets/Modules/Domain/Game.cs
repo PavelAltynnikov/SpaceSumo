@@ -2,7 +2,7 @@ using SpaceSumo.Powerups;
 using SpaceSumo.UI;
 using UnityEngine;
 
-namespace SpaceSumo.Game
+namespace SpaceSumo.Domain
 {
     public class Game
     {

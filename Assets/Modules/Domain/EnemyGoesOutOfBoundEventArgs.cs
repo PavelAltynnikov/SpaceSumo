@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System;
 
-namespace SpaceSumo.Game
+namespace SpaceSumo.Domain
 {
     public class EnemyGoesOutOfBoundEventArgs : EventArgs
     {

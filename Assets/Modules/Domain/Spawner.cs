@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using SpaceSumo.Powerups;
 
-namespace SpaceSumo.Game
+namespace SpaceSumo.Domain
 {
     public class Spawner : MonoBehaviour
     {

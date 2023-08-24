@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SpaceSumo.Game
+namespace SpaceSumo.Domain
 {
     public class RotateCamera : MonoBehaviour
     {

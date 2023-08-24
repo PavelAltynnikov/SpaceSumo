@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using SpaceSumo.Game;
+using SpaceSumo.Domain;
 
 namespace SpaceSumo.Abilities
 {

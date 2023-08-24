@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace SpaceSumo.Game
+namespace SpaceSumo.Domain
 {
     [RequireComponent(typeof(Rigidbody))]
     public class Enemy : MonoBehaviour

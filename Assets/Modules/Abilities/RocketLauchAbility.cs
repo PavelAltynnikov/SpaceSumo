@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using SpaceSumo.Game;
+using SpaceSumo.Domain;
 using TMPro;
 using UnityEngine;
 

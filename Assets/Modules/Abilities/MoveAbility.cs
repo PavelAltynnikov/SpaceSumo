@@ -1,5 +1,5 @@
 ﻿using System;
-using SpaceSumo.Game;
+using SpaceSumo.Domain;
 using UnityEngine;
 
 public class MoveAbility : MonoBehaviour
