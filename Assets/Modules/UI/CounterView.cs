@@ -5,7 +5,7 @@ namespace SpaceSumo.Presentation
 {
     internal class CounterView
     {
-        private TextMeshProUGUI _counter;
+        private readonly TextMeshProUGUI _counter;
 
         internal CounterView(TextMeshProUGUI counter)
         {

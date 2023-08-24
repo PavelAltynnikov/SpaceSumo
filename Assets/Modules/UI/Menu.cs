@@ -5,7 +5,7 @@ namespace SpaceSumo.Presentation
 {
     public class Menu : MonoBehaviour
     {
-        protected Menu? _previousMenu;
+        private Menu? _previousMenu;
 
         public void Show(Menu? previousMenu = null)
         {

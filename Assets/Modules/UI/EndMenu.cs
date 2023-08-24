@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using SpaceSumo.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,15 +8,23 @@ namespace SpaceSumo.Presentation
 {
     public class EndMenu : Menu
     {
-        [SerializeField] private Menu _gameMenu;
-        [SerializeField] private Menu _settingsMenu;
+        [SerializeField] private Menu? _gameMenu;
+        [SerializeField] private Menu? _settingsMenu;
 
         [SerializeField] private Button? _restartButton;
         [SerializeField] private Button? _settingsButton;
         [SerializeField] private Button? _exitButton;
 
         public event Action? RestartButtonPressed;
-        public event Action? ExitButtonPressed;
+
+        private void Awake()
+        {
+            this.CheckFieldValue(nameof(_gameMenu), _gameMenu);
+            this.CheckFieldValue(nameof(_settingsMenu), _settingsMenu);
+            this.CheckFieldValue(nameof(_restartButton), _restartButton);
+            this.CheckFieldValue(nameof(_settingsButton), _settingsButton);
+            this.CheckFieldValue(nameof(_exitButton), _exitButton);
+        }
 
         private void OnEnable()
         {
@@ -33,17 +42,21 @@ namespace SpaceSumo.Presentation
 
         private void RestartGame()
         {
-            _gameMenu.Show();
+            _gameMenu?.Show();
         }
 
         private void OpenSettings()
         {
-            _settingsMenu.Show(this);
+            _settingsMenu?.Show(this);
         }
 
         private void ExitGame()
         {
-            ExitButtonPressed?.Invoke();
+            #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+            #else
+            Application.Quit(); 
+            #endif
         }
     }
 }
