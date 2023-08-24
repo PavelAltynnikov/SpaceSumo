@@ -8,9 +8,9 @@ namespace SpaceSumo.Presentation
 {
     public class StartMenu : Menu
     {
-        [SerializeField] private Menu _startMenu;
-        [SerializeField] private Menu _gameMenu;
-        [SerializeField] private Menu _settingsMenu;
+        [SerializeField] private Menu? _startMenu;
+        [SerializeField] private Menu? _gameMenu;
+        [SerializeField] private Menu? _settingsMenu;
 
         [SerializeField] private Button? _startButton;
         [SerializeField] private Button? _settingsButton;
@@ -44,19 +44,23 @@ namespace SpaceSumo.Presentation
 
         private void StartGame()
         {
-            _gameMenu.Show(_startMenu);
+            _gameMenu?.Show(_startMenu);
             StartButtonPressed?.Invoke();
         }
 
         private void OpenSettings()
         {
-            _startMenu.Hide();
-            _settingsMenu.Show(this);
+            _startMenu?.Hide();
+            _settingsMenu?.Show(this);
         }
 
         private void ExitGame()
         {
-            ExitButtonPressed?.Invoke();
+            #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+            #else
+            Application.Quit(); 
+            #endif
         }
     }
 }
