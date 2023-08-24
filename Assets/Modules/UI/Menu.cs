@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using UnityEngine;
 
-namespace SpaceSumo.Presentation
+namespace SpaceSumo.UI
 {
     public class Menu : MonoBehaviour
     {

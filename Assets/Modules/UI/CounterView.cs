@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using TMPro;
 
-namespace SpaceSumo.Presentation
+namespace SpaceSumo.UI
 {
     internal class CounterView
     {

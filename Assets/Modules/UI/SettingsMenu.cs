@@ -3,7 +3,7 @@ using SpaceSumo.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace SpaceSumo.Presentation
+namespace SpaceSumo.UI
 {
     public class SettingsMenu : Menu
     {

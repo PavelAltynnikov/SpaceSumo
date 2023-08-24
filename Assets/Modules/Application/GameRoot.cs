@@ -1,5 +1,5 @@
 using SpaceSumo.Powerups;
-using SpaceSumo.Presentation;
+using SpaceSumo.UI;
 using UnityEngine;
 
 namespace SpaceSumo.Game
