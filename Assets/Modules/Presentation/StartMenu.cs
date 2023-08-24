@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using SpaceSumo.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +17,16 @@ namespace SpaceSumo.Presentation
         [SerializeField] private Button? _exitButton;
 
         public event Action? StartButtonPressed;
-        public event Action? ExitButtonPressed;
+
+        private void Awake()
+        {
+            this.CheckFieldValue(nameof(_startMenu), _startMenu);
+            this.CheckFieldValue(nameof(_gameMenu), _gameMenu);
+            this.CheckFieldValue(nameof(_settingsMenu), _settingsMenu);
+            this.CheckFieldValue(nameof(_startButton), _startButton);
+            this.CheckFieldValue(nameof(_settingsButton), _settingsButton);
+            this.CheckFieldValue(nameof(_exitButton), _exitButton);
+        }
 
         private void OnEnable()
         {
