@@ -1,6 +1,6 @@
 {
-    "name": "Presentation",
-    "rootNamespace": "SpaceSumo.Presentation",
+    "name": "UI",
+    "rootNamespace": "SpaceSumo.UI",
     "references": [
         "GUID:6055be8ebefd69e48b49212b09b47b2f",
         "GUID:7d6cab676a667be4d8002fc471e63cfe"
